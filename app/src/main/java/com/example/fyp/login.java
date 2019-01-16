@@ -51,8 +51,11 @@ public class login extends AppCompatActivity {
 
     public void login() {
         mAuth = FirebaseAuth.getInstance();
-        String email = user_email.getText().toString().trim();
-        String password = user_password.getText().toString().trim();
+        /*String email = user_email.getText().toString().trim();
+        String password = user_password.getText().toString().trim();*/
+
+        String email = "kit1997330@gmail.com";
+        String password = "95769632qwer";
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -61,6 +64,7 @@ public class login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(login.this, Main.class));
                 }
             }
         });
