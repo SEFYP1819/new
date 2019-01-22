@@ -5,8 +5,32 @@
     android:background="@drawable/gradient">
 
     <TextView
+        android:id="@+id/date_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Page" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Date View"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date_view"
+        android:layout_marginStart="20dp"
+        android:text="Name View"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/name_view"
+        android:layout_centerHorizontal="true" />
+
+
 
 </RelativeLayout>
