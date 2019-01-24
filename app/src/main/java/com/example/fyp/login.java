@@ -63,7 +63,6 @@ public class login extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(login.this, Main.class));
                 }
             }
