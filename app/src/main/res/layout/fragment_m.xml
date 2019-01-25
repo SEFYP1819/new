@@ -15,11 +15,20 @@
         android:textSize="30sp" />
 
     <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
+        android:id="@+id/list1"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
+        android:layout_below="@+id/date_view"
         android:layout_marginStart="20dp"
-        android:divider="@null"
-        android:layout_below="@+id/date_view" />
+        android:divider="@null" />
+
+    <ListView
+        android:id="@+id/list2"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/date_view"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/list1"
+        android:divider="@null" />
 
 </RelativeLayout>

@@ -30,7 +30,7 @@ public class m_fragment extends Fragment {
     SimpleDateFormat dateFormat, monthFormat;
     String date, month;
     TextView date_view;
-    ListView listView;
+    ListView listView1, listView2;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,7 +41,8 @@ public class m_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listView = getView().findViewById(R.id.list);
+        listView1 = getView().findViewById(R.id.list1);
+        listView2 = getView().findViewById(R.id.list2);
         show_time();
 
         getJSON("http://172.20.10.7/git.php");
@@ -99,12 +100,18 @@ public class m_fragment extends Fragment {
     public void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
         String[] text = new String[jsonArray.length()];
+        String[] date = new String[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             text[i] = obj.getString("text");
+            date[i] = obj.getString("date");
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.listviewstyle, R.id.data, text);
-        listView.setAdapter(arrayAdapter);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getActivity(), R.layout.listviewstyle, R.id.data, text);
+        listView1.setAdapter(arrayAdapter1);
+
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity(), R.layout.listviewstyle, R.id.data, date);
+        listView2.setAdapter(arrayAdapter2);
+
     }
 
 
