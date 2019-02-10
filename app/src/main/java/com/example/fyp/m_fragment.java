@@ -4,12 +4,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class m_fragment extends Fragment {
@@ -30,7 +33,9 @@ public class m_fragment extends Fragment {
     SimpleDateFormat dateFormat, monthFormat;
     String date, month;
     TextView date_view;
-    ListView listView1, listView2;
+    ListView StockList;
+    RelativeLayout BottomSheet;
+    BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,8 +46,11 @@ public class m_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listView1 = getView().findViewById(R.id.list1);
-        listView2 = getView().findViewById(R.id.list2);
+        BottomSheet = getView().findViewById(R.id.BottomSheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(BottomSheet);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        StockList = getView().findViewById(R.id.StockList);
         show_time();
 
         getJSON("http://172.20.10.7/git.php");
@@ -98,19 +106,23 @@ public class m_fragment extends Fragment {
     }
 
     public void loadIntoListView(String json) throws JSONException {
+        StockDataAdapter stockDataAdapter = new StockDataAdapter(getContext(), new ArrayList<Stock>());
+        StockList.setAdapter(stockDataAdapter);
+
         JSONArray jsonArray = new JSONArray(json);
-        String[] text = new String[jsonArray.length()];
-        String[] date = new String[jsonArray.length()];
+
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            text[i] = obj.getString("text");
-            date[i] = obj.getString("date");
+
+            Stock stock = new Stock(obj.getString("text"), obj.getString("date"));
+            stockDataAdapter.add(stock);
+
         }
-        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getActivity(), R.layout.listviewstyle, R.id.data, text);
+        /*ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getActivity(), R.layout.listviewstyle, R.id.data, text);
         listView1.setAdapter(arrayAdapter1);
 
         ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity(), R.layout.listviewstyle, R.id.data, date);
-        listView2.setAdapter(arrayAdapter2);
+        listView2.setAdapter(arrayAdapter2);*/
 
     }
 
