@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:gravity="center_vertical"
-        android:text="Bottom Sheet Title"
+        android:text="Stock Detail"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

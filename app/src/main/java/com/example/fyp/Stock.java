@@ -1,20 +1,29 @@
 package com.example.fyp;
 
 public class Stock {
+    String StockFullName, StockShortName, StockPrice, StockPriceChange;
 
-    String StockName, StockPrice;
-
-    public Stock(String stockName, String stockPrice) {
-        StockName = stockName;
+    public Stock(String stockFullName, String stockShortName, String stockPrice, String stockPriceChange) {
+        StockFullName = stockFullName;
+        StockShortName = stockShortName;
         StockPrice = stockPrice;
+        StockPriceChange = stockPriceChange;
     }
 
-    public String getStockName() {
-        return StockName;
+    public String getStockFullName() {
+        return StockFullName;
     }
 
-    public void setStockName(String stockName) {
-        StockName = stockName;
+    public void setStockFullName(String stockFullName) {
+        StockFullName = stockFullName;
+    }
+
+    public String getStockShortName() {
+        return StockShortName;
+    }
+
+    public void setStockShortName(String stockShortName) {
+        StockShortName = stockShortName;
     }
 
     public String getStockPrice() {
@@ -24,4 +33,13 @@ public class Stock {
     public void setStockPrice(String stockPrice) {
         StockPrice = stockPrice;
     }
+
+    public String getStockPriceChange() {
+        return StockPriceChange;
+    }
+
+    public void setStockPriceChange(String stockPriceChange) {
+        StockPriceChange = stockPriceChange;
+    }
+
 }
