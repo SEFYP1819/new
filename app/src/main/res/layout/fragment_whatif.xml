@@ -2,13 +2,113 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    android:padding="10dp">
 
     <TextView
+        android:id="@+id/FragmentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="What-if Page" />
+        android:text="What-If Report"
+        android:textColor="@color/dark_gray"
+        android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/Title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/FragmentTitle"
+        android:text="Risk"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <SeekBar
+        android:id="@+id/ReturnSeekBar"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Title1"
+        android:max="100" />
+
+    <TextView
+        android:id="@+id/ReturnSeekBarValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Title1"
+        android:layout_toEndOf="@+id/ReturnSeekBar"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/Title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Return"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <SeekBar
+        android:id="@+id/RiskSeekBar"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Title2"
+        android:max="100" />
+
+
+    <TextView
+        android:id="@+id/RiskSeekBarValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Title2"
+        android:layout_toEndOf="@+id/RiskSeekBar"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/Title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="Shape Ratio"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <SeekBar
+        android:id="@+id/ShapeRatioSeekBar"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Title3"
+        android:max="100" />
+
+    <TextView
+        android:id="@+id/ShapeRatioSeekBarValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Title3"
+        android:layout_toEndOf="@+id/ShapeRatioSeekBar"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/Title4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Portfolio Stock Weighting"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <ListView
+        android:id="@+id/CurrentPortfolioList"
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"
+        android:layout_below="@id/Title4" />
+
+    <Button
+        android:id="@+id/SubmitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonstyle"
+        android:text="Enter" />
 
 
 </RelativeLayout>
