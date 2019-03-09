@@ -1,5 +1,6 @@
 package com.example.fyp;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +10,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,6 +42,7 @@ public class m_fragment extends Fragment {
     TextView date_view;
     ListView StockDataList;
     RelativeLayout BottomSheet;
+    ImageView BottomSheetCloseBtn;
     BottomSheetBehavior bottomSheetBehavior;
     String[] url;
 
@@ -66,6 +70,16 @@ public class m_fragment extends Fragment {
         url[3] = "https://www.bloomberg.com/quote/NYA:IND";
 
         GetJsoupContent(url);
+
+        BottomSheetCloseBtn = getView().findViewById(R.id.BottomSheetCloseBtn);
+        BottomSheetCloseBtn.setVisibility(View.INVISIBLE);
+        BottomSheetCloseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                BottomSheetCloseBtn.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     public void show_time() {
@@ -184,6 +198,33 @@ public class m_fragment extends Fragment {
                         public void run() {
                             Stock stock = new Stock(StockFullNameBuilder.toString(), StockShortNameBuilder.toString(), StockPriceBuilder.toString(), StockPriceChangeBuilder.toString());
                             s.add(stock);
+
+                            StockDataList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    BottomSheetCloseBtn.setVisibility(View.VISIBLE);
+
+                                    TextView BottomSheetTitle =getView().findViewById(R.id.BottomSheetTitle);
+                                    BottomSheetTitle.setText(s.getItem(position).getStockShortName());
+
+                                    TextView BottomSheetStockFullName = getView().findViewById(R.id.BottomSheetStockFullName);
+                                    BottomSheetStockFullName.setText(s.getItem(position).getStockFullName());
+
+                                    TextView BottomSheetStockPrice = getView().findViewById(R.id.BottomSheetStockPrice);
+                                    BottomSheetStockPrice.setText(s.getItem(position).getStockPrice()+"   ");
+
+                                    TextView BottomSheetStockPriceChange = getView().findViewById(R.id.BottomSheetStockPriceChange);
+                                    double change = Double.parseDouble(s.getItem(position).getStockPriceChange().trim().replace("%",""));
+                                    if (change < 0) {
+                                        BottomSheetStockPriceChange.setTextColor(Color.parseColor("#ff0000"));
+                                    } else if (change >= 0) {
+                                        BottomSheetStockPriceChange.setTextColor(Color.parseColor("#00ff00"));
+                                    }
+                                    BottomSheetStockPriceChange.setText(s.getItem(position).getStockPriceChange());
+
+                                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                                }
+                            });
                         }
                     });
                 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ListColumn"
-    android:padding="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/StockShortName"
@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:text="Stock Short Name"
         android:textColor="#ffffff"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/StockFullName"
@@ -24,7 +24,7 @@
         android:gravity="center_vertical"
         android:text="Stock Full Name"
         android:textColor="#808080"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/StockPrice"
@@ -34,7 +34,7 @@
         android:gravity="center_vertical"
         android:text="Stock Price"
         android:textColor="#ffffff"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/StockPriceChange"
@@ -44,7 +44,7 @@
         android:layout_below="@id/StockPrice"
         android:gravity="center_vertical"
         android:text="Stock Price Change"
-        android:textColor="#808080"
+        android:textColor="#ffffff"
         android:textSize="12sp" />
 
 </RelativeLayout>

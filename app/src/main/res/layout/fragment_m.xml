@@ -16,7 +16,8 @@
             android:layout_marginStart="10dp"
             android:text="Date View"
             android:textColor="@color/dark_gray"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/stock_view"
@@ -26,7 +27,8 @@
             android:layout_marginTop="10dp"
             android:text="Stock"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/StockDataList"

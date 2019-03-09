@@ -10,19 +10,68 @@
     app:behavior_peekHeight="?android:actionBarSize"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
+    <ImageView
+        android:id="@+id/BottomSheetCloseBtn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_round_close"
+        android:tint="@color/dark_gray" />
+
     <TextView
         android:id="@+id/BottomSheetTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="70dp"
         android:gravity="center_vertical"
         android:text="Stock Detail"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/StockLineChart"
+    <TextView
+        android:id="@+id/BottomSheetStockFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginStart="95dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/dark_gray"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/BottomSheetStockPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/BottomSheetTitle"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/BottomSheetStockPriceChange"
+        android:layout_width="wrap_content"
+        android:layout_height="15sp"
+        android:layout_below="@id/BottomSheetStockFullName"
+        android:layout_toRightOf="@id/BottomSheetStockPrice"
+        android:gravity="center_vertical"
+        android:textColor="@color/dark_gray"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/BottomSheetDivider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/BottomSheetStockPrice"
+        android:background="@color/background_black" />
+
+    <TextView
+        android:id="@+id/BottomSheetLineChart"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@+id/BottomSheetTitle" />
+        android:layout_below="@id/BottomSheetDivider1"
+        android:gravity="center"
+        android:text="Line Chart"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
 
 </RelativeLayout>

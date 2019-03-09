@@ -1,6 +1,9 @@
 package com.example.fyp;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -34,16 +37,16 @@ public class StockDataAdapter extends ArrayAdapter<Stock> {
         StockPrice.setText(getItem(position).getStockPrice());
 
         TextView StockPriceChange = convertView.findViewById(R.id.StockPriceChange);
+        double change = Double.parseDouble(getItem(position).getStockPriceChange().trim().replace("%",""));
+
+        if (change < 0) {
+            StockPriceChange.setBackgroundResource(R.drawable.redstockpricebackground);
+        } else if (change >= 0) {
+            StockPriceChange.setBackgroundResource(R.drawable.greenstockpricebackground);
+        }
         StockPriceChange.setText(getItem(position).getStockPriceChange());
 
         convertView.findViewById(R.id.StockDataList);
-
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), getItem(position).getStockFullName(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return convertView;
     }
