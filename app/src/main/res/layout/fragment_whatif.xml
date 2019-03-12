@@ -1,114 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
-    android:padding="10dp">
+    android:background="@drawable/gradient">
 
-    <TextView
-        android:id="@+id/FragmentTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="What-If Report"
-        android:textColor="@color/dark_gray"
-        android:textSize="18sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/Title1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/FragmentTitle"
-        android:text="Risk"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/TitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What-if Report"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <SeekBar
-        android:id="@+id/ReturnSeekBar"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/Title1"
-        android:max="100" />
+        <RelativeLayout
+            android:id="@+id/Title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TitleView">
 
-    <TextView
-        android:id="@+id/ReturnSeekBarValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title1"
-        android:layout_toEndOf="@+id/ReturnSeekBar"
-        android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/USStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="US Stock"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/Title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:text="Return"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+            <TextView
+                android:id="@+id/USStockPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="%"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <SeekBar
-        android:id="@+id/RiskSeekBar"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/Title2"
-        android:max="100" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/USStock"
+                android:background="@color/background_black" />
+
+            <ListView
+                android:id="@+id/USStockList"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/USStock" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Title1">
+
+            <TextView
+                android:id="@+id/InternationalStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="International Stock"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/InternationalStockPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="%"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/InternationalStock"
+                android:background="@color/background_black" />
+
+            <ListView
+                android:id="@+id/InternationalStockList"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/InternationalStock" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Title2">
+
+            <TextView
+                android:id="@+id/USBonds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="US Bonds"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/USBondsPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="%"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/USBonds"
+                android:background="@color/background_black" />
+
+            <ListView
+                android:id="@+id/USBondsList"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@id/USBonds" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Title3">
+
+            <TextView
+                android:id="@+id/InternationalBonds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="International Bonds"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/InternationalBondsPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="%"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/InternationalBonds"
+                android:background="@color/background_black" />
+
+            <ListView
+                android:id="@+id/InternationalBondsList"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/InternationalBonds" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Title5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Title4">
+
+            <TextView
+                android:id="@+id/PortfolioAnalysis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Portfolio Analysis"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/PortfolioAnalysis"
+                android:background="@color/background_black" />
 
 
-    <TextView
-        android:id="@+id/RiskSeekBarValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title2"
-        android:layout_toEndOf="@+id/RiskSeekBar"
-        android:textColor="@color/white" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/Title3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="Shape Ratio"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+    </RelativeLayout>
 
-    <SeekBar
-        android:id="@+id/ShapeRatioSeekBar"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/Title3"
-        android:max="100" />
-
-    <TextView
-        android:id="@+id/ShapeRatioSeekBarValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title3"
-        android:layout_toEndOf="@+id/ShapeRatioSeekBar"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/Title4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:text="Portfolio Stock Weighting"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
-
-    <ListView
-        android:id="@+id/CurrentPortfolioList"
-        android:layout_width="wrap_content"
-        android:layout_height="280dp"
-        android:layout_below="@id/Title4" />
-
-    <Button
-        android:id="@+id/SubmitBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/buttonstyle"
-        android:text="Enter" />
-
-
-</RelativeLayout>
+</ScrollView>
