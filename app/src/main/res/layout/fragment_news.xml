@@ -2,11 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    android:padding="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/MessageListView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="News Page" />
+        android:layout_above="@id/MessageInputBox"
+        android:divider="@null"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
+
+    <EditText
+        android:id="@+id/MessageInputBox"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/input_message_box_style"
+        android:hint="Type Message Here..." />
+
+    <Button
+        android:id="@+id/SubmitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/MessageInputBox"
+        android:background="@drawable/send_button_style"
+        android:text="Send"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

@@ -69,7 +69,7 @@ public class m_fragment extends Fragment {
         url[2] = "https://www.bloomberg.com/quote/SPX:IND";
         url[3] = "https://www.bloomberg.com/quote/NYA:IND";
 
-        GetJsoupContent(url);
+        /*GetJsoupContent(url);*/
 
         BottomSheetCloseBtn = getView().findViewById(R.id.BottomSheetCloseBtn);
         BottomSheetCloseBtn.setVisibility(View.INVISIBLE);
@@ -91,60 +91,6 @@ public class m_fragment extends Fragment {
         month = monthFormat.format(calendar.getTime());
         date_view.setText(date+" "+month);
     }
-
-    /*public void getJSON(final String urlWebService) {
-        class GetJSON extends AsyncTask<Void, Void, String> {
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                try {
-                    URL url = new URL(urlWebService);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    StringBuilder sb = new StringBuilder();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                    String json;
-                    while ((json = bufferedReader.readLine()) != null) {
-                        sb.append(json+"\n");
-                    }
-                    return sb.toString().trim();
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    loadIntoListView(s);
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-        }
-        GetJSON getJSON = new GetJSON();
-        getJSON.execute();
-    }*/
-
-   /* public void loadIntoListView(String json) throws JSONException {
-        StockDataAdapter stockDataAdapter = new StockDataAdapter(getContext(), new ArrayList<Stock>());
-        StockDataList.setAdapter(stockDataAdapter);
-
-        JSONArray jsonArray = new JSONArray(json);
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-
-            Stock stock = new Stock(obj.getString("text"), obj.getString("date"));
-            stockDataAdapter.add(stock);
-
-        }
-    }*/
 
     public void GetJsoupContent(final String[] url) {
         final StockDataAdapter s = new StockDataAdapter(getContext(), new ArrayList<Stock>());

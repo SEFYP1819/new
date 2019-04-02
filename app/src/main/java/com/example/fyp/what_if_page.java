@@ -1,19 +1,20 @@
 package com.example.fyp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,9 +24,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
-public class whatif_fragment extends Fragment {
+public class what_if_page extends AppCompatActivity {
 
     EditText USStock1, USStock2, USStock3, USStock4, INStock1, INStock2, USBond1, USBond2, USBond3, INBond1, INBond2;
     SeekBar RiskLevelSeekBar, ReturnLevelSeekBar;
@@ -33,37 +33,73 @@ public class whatif_fragment extends Fragment {
     Button SubmitButton;
     int x;
 
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_whatif, container, false);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_what_if_page);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        RelativeLayout BottomMenu = findViewById(R.id.BottomMenu);
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(BottomMenu);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-        USStock1 = getView().findViewById(R.id.USStockContent_1);
-        USStock2 = getView().findViewById(R.id.USStockContent_2);
-        USStock3 = getView().findViewById(R.id.USStockContent_3);
-        USStock4 = getView().findViewById(R.id.USStockContent_4);
+        ImageView HomePageBtn, ProfilePageBtn, RebalancePageBtn, ChatBotPageBtn, LogoutBtn;
+        HomePageBtn = findViewById(R.id.HomePageBtn);
+        ProfilePageBtn = findViewById(R.id.ProfilePageBtn);
+        RebalancePageBtn = findViewById(R.id.RebalancePageBtn);
+        ChatBotPageBtn = findViewById(R.id.ChatBotPageBtn);
+        LogoutBtn = findViewById(R.id.LogOutBtn);
 
-        INStock1 = getView().findViewById(R.id.INStockContent_1);
-        INStock2 = getView().findViewById(R.id.INStockContent_2);
+        ProfilePageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(what_if_page.this, profile_page.class));
+            }
+        });
 
-        USBond1 = getView().findViewById(R.id.USBondContent_1);
-        USBond2 = getView().findViewById(R.id.USBondContent_2);
-        USBond3 = getView().findViewById(R.id.USBondContent_3);
+        HomePageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(what_if_page.this, home_page.class));
+            }
+        });
 
-        INBond1 = getView().findViewById(R.id.INBondContent_1);
-        INBond2 = getView().findViewById(R.id.INBondContent_2);
+        ChatBotPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(what_if_page.this, chat_bot_page.class));
+            }
+        });
 
-        RiskLevelSeekBar = getView().findViewById(R.id.OverallRiskSeekBar);
+        LogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+                startActivity(new Intent(what_if_page.this, Start.class));
+            }
+        });
+
+        USStock1 = findViewById(R.id.USStockContent_1);
+        USStock2 = findViewById(R.id.USStockContent_2);
+        USStock3 = findViewById(R.id.USStockContent_3);
+        USStock4 = findViewById(R.id.USStockContent_4);
+
+        INStock1 = findViewById(R.id.INStockContent_1);
+        INStock2 = findViewById(R.id.INStockContent_2);
+
+        USBond1 = findViewById(R.id.USBondContent_1);
+        USBond2 = findViewById(R.id.USBondContent_2);
+        USBond3 = findViewById(R.id.USBondContent_3);
+
+        INBond1 = findViewById(R.id.INBondContent_1);
+        INBond2 = findViewById(R.id.INBondContent_2);
+
+        RiskLevelSeekBar = findViewById(R.id.OverallRiskSeekBar);
         RiskLevelSeekBar.setProgress(40);
-        ReturnLevelSeekBar = getView().findViewById(R.id.OverallReturnSeekBar);
+        ReturnLevelSeekBar = findViewById(R.id.OverallReturnSeekBar);
         ReturnLevelSeekBar.setProgress(50);
 
-        RiskLevel = getView().findViewById(R.id.OverallRiskLevel);
+        RiskLevel = findViewById(R.id.OverallRiskLevel);
         x = RiskLevelSeekBar.getProgress();
         if (x<=33) {
             RiskLevel.setText("Less Risk");
@@ -72,12 +108,11 @@ public class whatif_fragment extends Fragment {
         } else {
             RiskLevel.setText("Moderate");
         }
-        ReturnLevel = getView().findViewById(R.id.OverallReturnLevel);
+        ReturnLevel = findViewById(R.id.OverallReturnLevel);
         x = ReturnLevelSeekBar.getProgress();
         ReturnLevel.setText(Integer.toString(x));
 
-        SubmitButton = getView().findViewById(R.id.SubmitBtn);
-
+        SubmitButton = findViewById(R.id.SubmitBtn);
 
         RiskLevelSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -123,9 +158,10 @@ public class whatif_fragment extends Fragment {
         SubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doRebalance("http://192.168.0.186/doRebalance.php");
+                doRebalance("http://172.18.9.169/doRebalance.php");
             }
         });
+
     }
 
     public void doRebalance(final String urlwebservices) {
@@ -141,7 +177,7 @@ public class whatif_fragment extends Fragment {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
 
-                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -180,26 +216,19 @@ public class whatif_fragment extends Fragment {
                     con.setDoOutput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                   /* StringBuilder post = new StringBuilder();
-                    for (int count = 0; count < 11; count++) {
-                        post.append(etf_name[count]).append("=").append(etf_Percentage[count]);
-                        if (count != 10) {
-                            post.append("&");
-                        }
-                    }*/
 
                     String post_data =
                             URLEncoder.encode("USStock1", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[0], "UTF-8")+"&"
-                            +URLEncoder.encode("USStock2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[1], "UTF-8")+"&"
-                            +URLEncoder.encode("USStock3", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[2], "UTF-8")+"&"
-                            +URLEncoder.encode("USStock4", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[3], "UTF-8")+"&"
-                            +URLEncoder.encode("INStock1", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[4], "UTF-8")+"&"
-                            +URLEncoder.encode("INStock2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[5], "UTF-8")+"&"
-                            +URLEncoder.encode("USBond1", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[6], "UTF-8")+"&"
-                            +URLEncoder.encode("USBond2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[7], "UTF-8")+"&"
-                            +URLEncoder.encode("USBond3", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[8], "UTF-8")+"&"
-                            +URLEncoder.encode("INBond1", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[9], "UTF-8")+"&"
-                            +URLEncoder.encode("INBond2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[10], "UTF-8");
+                                    +URLEncoder.encode("USStock2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[1], "UTF-8")+"&"
+                                    +URLEncoder.encode("USStock3", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[2], "UTF-8")+"&"
+                                    +URLEncoder.encode("USStock4", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[3], "UTF-8")+"&"
+                                    +URLEncoder.encode("INStock1", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[4], "UTF-8")+"&"
+                                    +URLEncoder.encode("INStock2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[5], "UTF-8")+"&"
+                                    +URLEncoder.encode("USBond1", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[6], "UTF-8")+"&"
+                                    +URLEncoder.encode("USBond2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[7], "UTF-8")+"&"
+                                    +URLEncoder.encode("USBond3", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[8], "UTF-8")+"&"
+                                    +URLEncoder.encode("INBond1", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[9], "UTF-8")+"&"
+                                    +URLEncoder.encode("INBond2", "UTF-8")+"="+URLEncoder.encode(etf_Percentage[10], "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
 
@@ -219,4 +248,5 @@ public class whatif_fragment extends Fragment {
         StartRebalance startRebalance = new StartRebalance();
         startRebalance.execute();
     }
+
 }

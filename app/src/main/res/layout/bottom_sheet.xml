@@ -8,7 +8,8 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     app:behavior_peekHeight="?android:actionBarSize"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    >
 
     <ImageView
         android:id="@+id/BottomSheetCloseBtn"

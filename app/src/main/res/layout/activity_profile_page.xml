@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".profile_page">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/TitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/NameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TitleView"
+            android:text="Name View"
+            android:textColor="@color/dark_gray"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/ProfilePieChart"
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
+
+            <ListView
+                android:id="@+id/ProfileStockListView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/ProfilePieChart" />
+
+            <TextView
+                android:id="@+id/OverallRiskTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ProfileStockListView"
+                android:text="Overall Risk"
+                android:textColor="@color/dark_gray"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/RiskView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/ProfileStockListView"
+                android:text="Risk"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/OverallReturnTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="350dp"
+                android:text="Overall Return"
+                android:textColor="@color/dark_gray"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/ReturnView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="350dp"
+                android:text="Return"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/ProjectionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="400dp"
+                android:text="Projection"
+                android:textColor="@color/dark_gray"
+                android:textSize="25sp" />
+
+            <ListView
+                android:id="@+id/ProjectionListView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/ProjectionTextView" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/bottom_menu" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -42,7 +42,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.whatif:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new whatif_fragment()).commit();
                 break;
-            case R.id.news:
+            case R.id.help:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new news_fragment()).commit();
                 break;
             case R.id.logout:

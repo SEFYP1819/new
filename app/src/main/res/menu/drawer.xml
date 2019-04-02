@@ -12,12 +12,12 @@
             android:title="Profile" />
 
         <item
-            android:id="@+id/news"
-            android:title="News Feed" />
-
-        <item
             android:id="@+id/whatif"
             android:title="What-If Report" />
+
+        <item
+            android:id="@+id/help"
+            android:title="Help" />
 
         <item
             android:id="@+id/logout"
