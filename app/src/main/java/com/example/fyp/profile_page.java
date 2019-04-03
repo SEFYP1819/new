@@ -1,6 +1,7 @@
 package com.example.fyp;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -25,6 +27,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +90,7 @@ public class profile_page extends AppCompatActivity {
             }
         });
 
-        getUserPortfolio();
+        getUserPortfolio("http://172.18.9.169/fetch.php");
     }
 
     public void getCurrentUserName() {
@@ -103,7 +115,119 @@ public class profile_page extends AppCompatActivity {
         }
     }
 
-    public void getUserPortfolio() {
+    public void getUserPortfolio(final String urlWebServices) {
+
+        class getPortfolio extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                /*Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();*/
+
+                try {
+                    LoadintoListView(s);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    FirebaseUser CurrentUser = mAuth.getCurrentUser();
+                    String UID = CurrentUser.getUid();
+                    URL url = new URL(urlWebServices);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    con.setDoInput(true);
+                    con.setDoOutput(true);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String JSON;
+                    while ((JSON = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(JSON +"\n");
+                    }
+                    return stringBuilder.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }
+        getPortfolio a = new getPortfolio();
+        a.execute();
+    }
+
+    public  void LoadintoListView(String json) throws JSONException {
+        JSONArray jsonArray = new JSONArray(json);
+        JSONObject obj = jsonArray.getJSONObject(0);
+
+        ListView ProfileStockListView = findViewById(R.id.ProfileStockListView);
+        profileAdapter p = new profileAdapter(getApplicationContext(), new ArrayList<Profile>());
+        ProfileStockListView.setAdapter(p);
+
+        Profile ListTitle = new Profile("Stock Name", "Percentage", "Return");
+        p.add(ListTitle);
+
+        String[] item = new String[14];
+        item[0] = "US Total Stock Market";
+        item[1] = "US Value Stocks (Large Cap.)";
+        item[2] = "US Value Stocks (Mid Cap.)";
+        item[3] = "US Value Stocks (Small Cap.)";
+        item[4] = "Intl. Developed Market Stocks";
+        item[5] = "Intl. Emerging Market Stocks";
+        item[6] = "US High Quality Bonds";
+        item[7] = "US Municipal Bonds";
+        item[8] = "US Inflation-Protected Bonds";
+        item[9] = "US High-Yield Corp. Bonds";
+        item[10] = "US Short-Term Treasury Bonds";
+        item[11] = "US Short-Term Investment-Grade Bonds";
+        item[12] = "Intl. Developed Market Bonds";
+        item[13] = "Intl. Emerging Market Bonds";
+
+        for (int count = 0; count < 14; count++) {
+            if (!obj.getString(item[count]).equals("0")) {
+                Profile item1 = new Profile(item[count], obj.getString(item[count]), "0");
+                p.add(item1);
+            }
+        }
+
+        TextView RiskView = findViewById(R.id.RiskView);
+        RiskView.setText(obj.getString("Risk"));
+
+        TextView ReturnView = findViewById(R.id.ReturnView);
+        ReturnView.setText(obj.getString("Return rate"));
+
+        //Load Pie Chart
+        PieChart pieChart = findViewById(R.id.ProfilePieChart);
+        float[] wts = new float[14];
+
+        List<PieEntry> pieEntries = new ArrayList<>();
+
+        for (int count = 0; count < 13; count++) {
+            wts[count] = Float.parseFloat(obj.getString(item[count]));
+            if (wts[count] != 0) {
+                pieEntries.add(new PieEntry(wts[count], item[count]));
+            }
+        }
+
+        PieDataSet dataSet = new PieDataSet(pieEntries, "Portfolio Weightings");
+        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
+        dataSet.setValueTextColor(ColorTemplate.rgb("#000000"));
+        PieData pieData = new PieData(dataSet);
+        pieChart.setData(pieData);
+        pieChart.animateY(1000);
+        pieChart.setHoleRadius(50);
+        pieChart.setHoleColor(121212);
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(false);
+        pieChart.invalidate();
+    }
+
+/*    public void getUserPortfolio() {
         ListView ProfileStockListView = findViewById(R.id.ProfileStockListView);
         final profileAdapter p = new profileAdapter(getApplicationContext(), new ArrayList<Profile>());
         ProfileStockListView.setAdapter(p);
@@ -169,5 +293,5 @@ public class profile_page extends AppCompatActivity {
 
         projection item2 = new projection("Test Value 2", "4%");
         pro.add(item2);
-    }
+    }*/
 }

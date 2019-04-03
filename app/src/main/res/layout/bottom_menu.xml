@@ -7,13 +7,13 @@
     android:background="#0a0a10"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    app:behavior_peekHeight="50dp"
+    app:behavior_peekHeight="20dp"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <ImageView
         android:id="@+id/BottomMenuToggle"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/horiz_dot" />
 

@@ -5,15 +5,15 @@
 
     <TextView
         android:id="@+id/StockFullName"
-        android:layout_width="100dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="left"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
     <TextView
         android:id="@+id/Percentage"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/StockFullName"
         android:gravity="center"
@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/Return"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/Percentage"
         android:gravity="center"
