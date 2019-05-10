@@ -23,425 +23,129 @@
 
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="465dp"
-        android:layout_marginTop="60dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
-        <RelativeLayout
+        <CheckBox
+            android:id="@+id/RebalanceUsingRiskReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:buttonTint="@color/white"
+            android:text="Rebalancing Using Risk / Return"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/USStock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="US Stock"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/RiskTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/RebalanceUsingRiskReturn"
+            android:text="Risk Level"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp" />
 
-            <RelativeLayout
-                android:id="@+id/USStockContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/USStock">
+        <TextView
+            android:id="@+id/RiskLevelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/RiskTextView"
+            android:layout_alignParentEnd="true"
+            android:text="Risk Level"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/USStockName_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="- US Total Stock Market: VTI"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
+        <CheckBox
+            android:id="@+id/RiskCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RiskTextView"
+            android:layout_marginStart="10dp"
+            android:buttonTint="@color/white" />
 
-                <EditText
-                    android:id="@+id/USStockContent_1"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="65%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
+        <SeekBar
+            android:id="@+id/RiskSeekBar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/RiskCheckBox"
+            android:layout_below="@id/RiskTextView"
+            android:layout_toEndOf="@id/RiskCheckBox"
+            android:background="@drawable/seekbarstyle1"
+            android:max="1272"
+            android:thumb="@drawable/seekthumb" />
 
-                <TextView
-                    android:id="@+id/USStockName_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/USStockName_1"
-                    android:gravity="center"
-                    android:text="- US Large-Cap Value: VTV"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
+        <TextView
+            android:id="@+id/ReturnTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Return Level"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp" />
 
-                <EditText
-                    android:id="@+id/USStockContent_2"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/USStockContent_1"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="5%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
+        <TextView
+            android:id="@+id/ReturnLevelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/ReturnTextView"
+            android:layout_alignParentEnd="true"
+            android:text="Return Level"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/USStockName_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/USStockName_2"
-                    android:gravity="center"
-                    android:text="- US Mid-Cap Value: VOE"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
+        <CheckBox
+            android:id="@+id/ReturnCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ReturnTextView"
+            android:layout_marginStart="10dp"
+            android:buttonTint="@color/white" />
 
-                <EditText
-                    android:id="@+id/USStockContent_3"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/USStockContent_2"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="5%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
+        <SeekBar
+            android:id="@+id/ReturnSeekBar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ReturnTextView"
+            android:layout_toEndOf="@id/ReturnCheckBox"
+            android:layout_alignBottom="@id/ReturnCheckBox"
+            android:background="@drawable/seekbarstyle1"
+            android:max="148"
+            android:thumb="@drawable/seekthumb" />
 
-                <TextView
-                    android:id="@+id/USStockName_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/USStockName_3"
-                    android:gravity="center"
-                    android:text="- US Small-Cap Value: VBR"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
+        <CheckBox
+            android:id="@+id/RebalanceUsingWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:buttonTint="@color/white"
+            android:text="Rebalancing Using Weighting"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/USStockContent_4"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/USStockContent_3"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="5%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
+        <ListView
+            android:id="@+id/StockList"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/RebalanceUsingWeight" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/USStockContent_4"
-                    android:background="@color/dark_gray" />
+        <Button
+            android:id="@+id/SubmitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/StockList"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/buttonstyle"
+            android:text="Submit"
+            android:textColor="@color/white" />
 
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/InternationalStock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/USStockContent"
-                android:text="International Stock"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:id="@+id/InternationalStockContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/InternationalStock">
-
-                <TextView
-                    android:id="@+id/INStockName_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="- Intl. Developed Markets: VEA"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/INStockContent_1"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="0%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/INStockName_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/INStockName_1"
-                    android:gravity="center"
-                    android:text="- Intl. Emerging Markets: VWO"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/INStockContent_2"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/INStockContent_1"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="0%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/INStockContent_2"
-                    android:background="@color/dark_gray" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/USBond"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/InternationalStockContent"
-                android:text="US Bond"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:id="@+id/USBondContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/USBond">
-
-                <TextView
-                    android:id="@+id/USBondName_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="- US Inflation-Protected Bonds: VTIP"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/USBondContent_1"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="0%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/USBondName_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/USBondName_1"
-                    android:gravity="center"
-                    android:text="- US High-Quality Bonds: AGG"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/USBondContent_2"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/USBondContent_1"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="20%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/USBondName_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/USBondName_2"
-                    android:gravity="center"
-                    android:text="- US Municipal Bonds: MUB"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/USBondContent_3"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/USBondContent_2"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="0%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/USBondContent_3"
-                    android:background="@color/dark_gray" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/InternationalBond"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/USBondContent"
-                android:text="International Bond"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:id="@+id/InternationalBondContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/InternationalBond">
-
-                <TextView
-                    android:id="@+id/INBondName_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="- International Developed Markets Bond"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/INBondContent_1"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="0%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/INBondName_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/INBondName_1"
-                    android:gravity="center"
-                    android:text="- International Emerging Markets Bond"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/INBondContent_2"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/INBondContent_1"
-                    android:background="@drawable/hollow_outline"
-                    android:gravity="center"
-                    android:text="0%"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/INBondContent_2"
-                    android:background="@color/dark_gray" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/PortfolioAnalysis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/InternationalBondContent"
-                android:text="Portfolio Analysis"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/OverallRisk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/PortfolioAnalysis"
-                android:text="Overall Risk"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/OverallRiskLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/OverallRisk"
-                android:text="Risk Level"
-                android:textColor="@color/dark_gray"
-                android:textSize="20sp" />
-
-            <SeekBar
-                android:id="@+id/OverallRiskSeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/OverallRiskLevel"
-                android:background="@drawable/seekbarstyle1"
-                android:max="100"
-                android:thumb="@drawable/seekthumb" />
-
-            <TextView
-                android:id="@+id/OverallReturn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/OverallRiskSeekBar"
-                android:text="Overall Return"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/OverallReturnLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/OverallReturn"
-                android:text="Return Level"
-                android:textColor="@color/dark_gray"
-                android:textSize="20sp" />
-
-            <SeekBar
-                android:id="@+id/OverallReturnSeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/OverallReturnLevel"
-                android:background="@drawable/seekbarstyle1"
-                android:max="159"
-                android:thumb="@drawable/seekthumb" />
-
-            <Button
-                android:id="@+id/SubmitBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/OverallReturnSeekBar"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/buttonstyle"
-                android:text="Submit"
-                android:textColor="@color/white" />
-
-        </RelativeLayout>
-
-    </ScrollView>
+    </RelativeLayout>
 
     <include layout="@layout/bottom_menu" />
 

@@ -35,12 +35,17 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class profile_page extends AppCompatActivity {
+
+    Float returnValue, riskValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,25 +99,29 @@ public class profile_page extends AppCompatActivity {
     }
 
     public void getCurrentUserName() {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser Current_User = mAuth.getCurrentUser();
+//        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser Current_User = mAuth.getCurrentUser();
+//
+//        if (Current_User != null) {
+//            DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("User").child(Current_User.getUid()).child("First Name");
+//
+//            user.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    TextView NameView = findViewById(R.id.NameView);
+//                    NameView.setText("Hello, " + dataSnapshot.getValue(String.class));
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
+//        }
 
-        if (Current_User != null) {
-            DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("User").child(Current_User.getUid()).child("First Name");
+        TextView NameView = findViewById(R.id.NameView);
+        NameView.setText("Hello, User");
 
-            user.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    TextView NameView = findViewById(R.id.NameView);
-                    NameView.setText("Hello, " + dataSnapshot.getValue(String.class));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
     }
 
     public void getUserPortfolio(final String urlWebServices) {
@@ -141,10 +150,18 @@ public class profile_page extends AppCompatActivity {
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     FirebaseUser CurrentUser = mAuth.getCurrentUser();
                     String UID = CurrentUser.getUid();
+                    //URL Method
                     URL url = new URL(urlWebServices);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     con.setDoInput(true);
                     con.setDoOutput(true);
+                    //write URL
+                    OutputStream outputStream = con.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("uid", "UTF-8")+"="+URLEncoder.encode(UID, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+
                     StringBuilder stringBuilder = new StringBuilder();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                     String JSON;
@@ -163,7 +180,7 @@ public class profile_page extends AppCompatActivity {
 
     public  void LoadintoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
-        JSONObject obj = jsonArray.getJSONObject(0);
+        final JSONObject obj = jsonArray.getJSONObject(0);
 
         ListView ProfileStockListView = findViewById(R.id.ProfileStockListView);
         profileAdapter p = new profileAdapter(getApplicationContext(), new ArrayList<Profile>());
@@ -188,18 +205,91 @@ public class profile_page extends AppCompatActivity {
         item[12] = "Intl. Developed Market Bonds";
         item[13] = "Intl. Emerging Market Bonds";
 
+        String[] StockBondReturnRate = new String[14];
+        StockBondReturnRate[0] = "15.90%";
+        StockBondReturnRate[1] = "14.27%";
+        StockBondReturnRate[2] = "13.32%";
+        StockBondReturnRate[3] = "15.28%";
+        StockBondReturnRate[4] = "10.22%";
+        StockBondReturnRate[5] = "14.97%";
+        StockBondReturnRate[6] = "1.77%";
+        StockBondReturnRate[7] = "1.53%";
+        StockBondReturnRate[8] = "1.53%";
+        StockBondReturnRate[9] = "2.99%";
+        StockBondReturnRate[10] = "0.94%";
+        StockBondReturnRate[11] = "1.64%";
+        StockBondReturnRate[12] = "3.09%";
+        StockBondReturnRate[13] = "6.16%";
+
         for (int count = 0; count < 14; count++) {
-            if (!obj.getString(item[count]).equals("0")) {
-                Profile item1 = new Profile(item[count], obj.getString(item[count]), "0");
-                p.add(item1);
+            if (!obj.getString(item[count]).equals("0.0000") && !obj.getString(item[count]).equals("0")) {
+                Profile List_item = new Profile(item[count], ChangeToPercentage(obj.getString(item[count])), StockBondReturnRate[count]);
+                p.add(List_item);
             }
         }
 
-        TextView RiskView = findViewById(R.id.RiskView);
-        RiskView.setText(obj.getString("Risk"));
+        String riskLevel = "";
+        riskValue = Float.parseFloat(obj.getString("Risk"));
 
-        TextView ReturnView = findViewById(R.id.ReturnView);
-        ReturnView.setText(obj.getString("Return rate"));
+        if ( riskValue < 0.0438 ) {
+            riskLevel = "very low";
+        } else if ( riskValue >= 0.22 && riskValue < 0.0438 ) {
+            riskLevel = "low";
+        } else if ( riskValue >= 0.0439 && riskValue < 0.0646 ) {
+            riskLevel = "moderate";
+        } else if ( riskValue >= 0.0647 && riskValue < 0.0854 ) {
+            riskLevel = "high";
+        } else if ( riskValue >= 0.0855 && riskValue < 0.1272 ) {
+            riskLevel = "very high";
+        } else {
+            riskLevel = "Extreme";
+        }
+
+        String returnLevel = "";
+        returnValue = Float.parseFloat(obj.getString("Return rate"));
+
+        if ( returnValue < 0.0401 ) {
+            returnLevel = "very low";
+        } else if ( returnValue >= 0.0402 && returnValue < 0.0698 ) {
+            returnLevel = "low";
+        } else if ( returnValue >= 0.0699 && returnValue < 0.0995 ) {
+            returnLevel = "moderate";
+        } else if ( returnValue >= 0.0966 && returnValue < 0.1293 ) {
+            returnLevel = "high";
+        } else if ( returnValue >= 0.1294 ) {
+            returnLevel = "very high";
+        }
+
+        final TextView RiskView = findViewById(R.id.RiskView);
+//        RiskView.setText(ChangeToPercentage(obj.getString("Risk")));
+        RiskView.setText(riskLevel);
+        RiskView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RiskView.setText(ChangeToPercentage(obj.getString("Risk")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        final TextView ReturnView = findViewById(R.id.ReturnView);
+//        ReturnView.setText(ChangeToPercentage(obj.getString("Return rate")));
+        ReturnView.setText(returnLevel);
+        ReturnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    ReturnView.setText(ChangeToPercentage(obj.getString("Return rate")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        TextView SharpeRatio = findViewById(R.id.SharpeRatioTextView);
+        SharpeRatio.setText(obj.getString("Sharpe"));
 
         //Load Pie Chart
         PieChart pieChart = findViewById(R.id.ProfilePieChart);
@@ -227,71 +317,12 @@ public class profile_page extends AppCompatActivity {
         pieChart.invalidate();
     }
 
-/*    public void getUserPortfolio() {
-        ListView ProfileStockListView = findViewById(R.id.ProfileStockListView);
-        final profileAdapter p = new profileAdapter(getApplicationContext(), new ArrayList<Profile>());
-        ProfileStockListView.setAdapter(p);
-
-        Profile listTitle = new Profile("Stock Name", "Percentage", "Return");
-        p.add(listTitle);
-
-        Profile etf1 = new Profile("ETF 1", "20%", "5%");
-        p.add(etf1);
-
-        Profile etf2 = new Profile("ETF 2", "50%", "5.5%");
-        p.add(etf2);
-
-        Profile etf3 = new Profile("ETF 3", "30%", "4.5%");
-        p.add(etf3);
-
-        PieChart pieChart = findViewById(R.id.ProfilePieChart);
-        String Label[] = {"xxx", "yyy", "zzz"};
-        float wts[] = {0,0,0};
-
-        Label[0] = etf1.getStockFullName();
-        Label[1] = etf2.getStockFullName();
-        Label[2] = etf3.getStockFullName();
-
-        wts[0] = Float.parseFloat(etf1.getPercentage().replace("%", ""));
-        wts[1] = Float.parseFloat(etf2.getPercentage().replace("%", ""));
-        wts[2] = Float.parseFloat(etf3.getPercentage().replace("%", ""));
-
-        List<PieEntry> pieEntries = new ArrayList<>();
-
-        for (int count = 0; count < Label.length; count++) {
-            pieEntries.add(new PieEntry(wts[count], Label[count]));
-        }
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Portfolio Weightings");
-
-        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
-
-        dataSet.setValueTextColor(ColorTemplate.rgb("#000000"));
-
-        PieData pieData = new PieData(dataSet);
-
-        pieChart.setData(pieData);
-
-        pieChart.animateY(1000);
-
-        pieChart.setHoleRadius(50);
-
-        pieChart.setHoleColor(121212);
-
-        Legend legend = pieChart.getLegend();
-
-        legend.setEnabled(false);
-
-        pieChart.invalidate();
-
-        ListView ProjectionListView = findViewById(R.id.ProjectionListView);
-        final ProjectionAdapter pro = new ProjectionAdapter(getApplicationContext(), new ArrayList<projection>());
-        ProjectionListView.setAdapter(pro);
-
-        projection item1 = new projection("Test Value 1", "5%");
-        pro.add(item1);
-
-        projection item2 = new projection("Test Value 2", "4%");
-        pro.add(item2);
-    }*/
+    public String ChangeToPercentage(String temp) {
+        Float d = Float.parseFloat(temp);
+        DecimalFormat df = new DecimalFormat("##.##");
+        d = d * 100;
+        StringBuilder sb = new StringBuilder();
+        sb.append(df.format(d)).append("%");
+        return sb.toString();
+    }
 }

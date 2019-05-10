@@ -53,6 +53,7 @@
             android:text="Send"
             android:textColor="#ffffff" />
 
+
     </RelativeLayout>
 
     <include layout="@layout/bottom_menu" />

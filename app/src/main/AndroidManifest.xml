@@ -24,7 +24,9 @@
         <activity android:name=".home_page" />
         <activity android:name=".profile_page" />
         <activity android:name=".what_if_page" />
-        <activity android:name=".chat_bot_page"></activity>
+        <activity android:name=".chat_bot_page" />
+        <activity android:name=".cal_risk_index" />
+        <activity android:name=".displayStockDetail"></activity>
     </application>
 
 </manifest>

@@ -94,7 +94,13 @@ public class home_page extends AppCompatActivity {
         final StockDataAdapter stockDataAdapter = new StockDataAdapter(getApplicationContext(), new ArrayList<Stock>());
         StockDataListView.setAdapter(stockDataAdapter);
 
-        Stock stock = new Stock("Dow Jones Industrial Average", "INDU:IND", "25,928.68 USD", "+0.82%");
-        stockDataAdapter.add(stock);
+        Stock stock1 = new Stock("Vanguard Total Stock Market ETF", "VTI:US", "149.4800 USD", "-0.08%");
+        stockDataAdapter.add(stock1);
+        Stock stock2 = new Stock("Xtrackers USD High Yield Corporate Bond ETF", "HYLB:US", "49.9864 USD", "+0.11%");
+        stockDataAdapter.add(stock2);
+        Stock stock3 = new Stock("Vanguard Total International Bond ETF", "BNDX:US", "55.7150 USD", "+0.03%");
+        stockDataAdapter.add(stock3);
+        Stock stock4 = new Stock("Vanguard FTSE Emerging Markets ETF", "VWO:US", "43.1801 USD", "-0.37%");
+        stockDataAdapter.add(stock4);
     }
 }

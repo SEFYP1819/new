@@ -4,33 +4,32 @@
     android:layout_height="50dp"
     android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/circle"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ic_round_play_circle"
-        android:tint="@color/dark_gray" />
-
-    <TextView
-        android:id="@+id/ListItemName"
+    <CheckBox
+        android:id="@+id/ListItemCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:text="Name"
+        android:buttonTint="@color/white"
         android:textColor="@color/dark_gray"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/ListItemText"
+        android:layout_alignBaseline="@id/ListItemCheckBox"
+        android:textSize="15sp"
+        android:textColor="@color/dark_gray"
+        android:layout_toRightOf="@id/ListItemCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/ListItemPercentage"
-        android:layout_width="50dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:background="@drawable/hollow_outline"
         android:backgroundTint="@color/dark_gray"
         android:gravity="center"
-        android:text="%"
         android:textColor="@color/white"
-        android:textSize="12sp" />
-
+        android:textSize="15sp" />
 
 </RelativeLayout>

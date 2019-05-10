@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:padding="10dp"
+    tools:context=".displayStockDetail">
+
+    <Button
+        android:id="@+id/BackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:gravity="right"
+        android:text="Back"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:id="@+id/StockShortNameBlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/StockShortNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="SHORT NAME"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <view
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:layout_alignBaseline="@id/StockShortNameTextView"
+            android:layout_toRightOf="@id/StockShortNameTextView" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/StockFullNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/StockShortNameBlock"
+        android:layout_toEndOf="@id/StockShortNameBlock"
+        android:text="FULL NAME"
+        android:textColor="@color/dark_gray"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:id="@+id/StockPriceBlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/StockShortNameBlock">
+
+        <TextView
+            android:id="@+id/StockPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STOCK PRICE"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <view
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:layout_alignBaseline="@id/StockPriceTextView"
+            android:layout_toRightOf="@id/StockPriceTextView" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/StockPriceChangeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/StockPriceBlock"
+        android:layout_toEndOf="@id/StockPriceBlock"
+        android:text="STOCK PRICE CHANGE" />
+
+    <ImageView
+        android:id="@+id/StockPriceLineChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/StockPriceBlock" />
+
+    <ListView
+        android:id="@+id/FinancialDataList"
+        android:layout_below="@id/StockPriceLineChart"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+</RelativeLayout>

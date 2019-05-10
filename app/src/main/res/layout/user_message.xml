@@ -17,8 +17,8 @@
         android:id="@+id/TimeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/ContentView"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/ContentView"
         android:text="hh/mm"
         android:textColor="#8c8c8c"
         android:textSize="12sp" />

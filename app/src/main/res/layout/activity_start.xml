@@ -15,6 +15,15 @@
         android:textColor="@color/white" />
 
     <Button
+        android:id="@+id/riskAssessBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@null"
+        android:text="Risk Assess"
+        android:textColor="@color/dark_gray" />
+
+    <Button
         android:id="@+id/start_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
